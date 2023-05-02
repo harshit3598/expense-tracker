@@ -46,8 +46,6 @@ export class UserTableComponent {
     }
     else {
       this.isDisabled = true;
-      this.userForm.get('firstName')?.pristine;
-      this.userForm.get('lastName')?.touched;
     }
 
   }

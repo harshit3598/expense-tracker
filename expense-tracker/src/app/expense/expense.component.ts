@@ -21,18 +21,18 @@ export class ExpenseComponent {
     cost: 0
   };
   expenseForm!: FormGroup;
+  isValid: boolean = false;
 
   constructor(private usersService: UserService, private expenseService: ExpensesService) { }
 
   ngOnInit(): any {
     this.users = this.usersService.getUsers();
-    console.log(this.users);
 
     this.getExpenses();
 
     this.expenseForm = new FormGroup({
       id: new FormControl(null),
-      userId: new FormControl(null),
+      userId: new FormControl('', Validators.required),
       category: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
       cost: new FormControl(null, Validators.required),
@@ -55,44 +55,41 @@ export class ExpenseComponent {
   modifyExpense(): void {
 
     var id: number;
-    if (this.expenseForm.get('id')?.value == null) {
-      id = Math.floor(Math.random() * 100000);
+    if (this.expenseForm.valid) {
+      this.isValid = false;
+      if (this.expenseForm.get('id')?.value == null) {
+        id = Math.floor(Math.random() * 100000);
+      }
+      else {
+        id = this.expenseForm.get('id')?.value
+      }
+      var expense = {
+        id: id,
+        userId: this.expenseForm.get('userId')?.value,
+        category: this.expenseForm.get('category')?.value,
+        description: this.expenseForm.get('description')?.value,
+        cost: this.expenseForm.get('cost')?.value
+      }
+      this.expenses[id] = expense;
+      let userToBeUpdated = this.users[expense.userId];
+      userToBeUpdated.totalExpenses = this.calculateUserExpense(expense.userId);
+      this.usersService.updateUser(userToBeUpdated);
+      this.clearForm();
     }
     else {
-      id = this.expenseForm.get('id')?.value
+      this.isValid = true;
     }
-    var expense = {
-      id: id,
-      userId: this.expenseForm.get('userId')?.value,
-      category: this.expenseForm.get('category')?.value,
-      description: this.expenseForm.get('description')?.value,
-      cost: this.expenseForm.get('cost')?.value
-    }
-
-    this.expenses[id] = expense;
-
-    let userToBeUpdated = this.users[expense.userId];
-    userToBeUpdated.totalExpenses = this.calculateUserExpense(expense.userId);
-    this.usersService.updateUser(userToBeUpdated);
-
-
-    this.clearForm();
-
-
   }
-
   editExpense(expense: any) {
     this.expenseForm.get('id')?.setValue(expense['id']);
     this.expenseForm.get('userId')?.setValue(expense['userId']);
     this.expenseForm.get('category')?.setValue(expense['category']);
     this.expenseForm.get('description')?.setValue(expense['description']);
     this.expenseForm.get('cost')?.setValue(expense['cost']);
-
   }
 
   deleteExpense(expense: Expense): void {
     delete this.expenses[expense.id]
-
     let userToBeUpdated = this.users[expense.userId];
     userToBeUpdated.totalExpenses = this.calculateUserExpense(expense.userId);
     this.usersService.updateUser(userToBeUpdated);

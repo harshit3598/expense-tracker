@@ -3,7 +3,7 @@
   <form [formGroup]="expenseForm">
     <!-- Input fields for user, category, description, and cost -->
 
-    <input type="hidden" id="id" class="form-control" formControlName="id" required />
+    <input type="hidden" id="id" class="form-control" formControlName="id" />
 
     <div class="form-group">
       <label for="user">User:</label>
@@ -11,21 +11,36 @@
         <option *ngFor="let k of userKey" [value]="users[k].id">{{ users[k].firstName }} {{ users[k].lastName }}
         </option>
       </select>
+      <div *ngIf="(expenseForm.controls['userId']?.touched || isValid) && expenseForm.controls['userId']?.errors?.['required']">
+        User name is required
+      </div>
     </div>
     <div class="form-group">
       <label for="category">Category:</label>
       <select id="category" class="form-control" name="category" formControlName="category" required>
         <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
       </select>
+
+      <div *ngIf="(expenseForm.controls['category']?.touched || isValid) && expenseForm.controls['category']?.errors?.['required']">
+        category is required
+      </div>
     </div>
     <div class="form-group">
       <label for="description">Description:</label>
       <input id="description" class="form-control" type="text" name="description" formControlName="description"
         required>
+
+        <div *ngIf="(expenseForm.controls['description']?.touched || isValid) && expenseForm.controls['description']?.errors?.['required']">
+          description is required
+        </div>
     </div>
     <div class="form-group">
       <label for="cost">Cost:</label>
       <input id="cost" class="form-control" type="number" name="cost" formControlName="cost" required>
+
+      <div *ngIf="(expenseForm.controls['cost']?.touched || isValid) && expenseForm.controls['cost']?.errors?.['required']">
+        cost is required
+      </div>
     </div>
     <button class="btn btn-primary" (click)="modifyExpense()">
       <span *ngIf="expenseForm.controls['id'].value == null">Add</span>
