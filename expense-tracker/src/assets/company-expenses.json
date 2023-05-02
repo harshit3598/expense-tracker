@@ -1,0 +1,17 @@
+{
+    "companyExpenses": [
+      {
+        "category": "Food",
+        "totalExpense": 1000
+      },
+      {
+        "category": "Travel",
+        "totalExpense": 2000
+      },
+      {
+        "category": "Equipment",
+        "totalExpense": 1500
+      }
+    ]
+  }
+  

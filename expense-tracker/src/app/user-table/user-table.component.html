@@ -1,1 +1,56 @@
-<p>user-table works!</p>
+<h2>Users</h2>
+
+<!-- Add new user form -->
+<div [formGroup]="userForm">
+  <div>
+    <label>First name:</label>
+    <input type="text" id="firstName" class="form-control" formControlName="firstName" required />
+    <div *ngIf="(userForm.controls['firstName']?.touched || isDisabled) && userForm.controls['firstName']?.errors?.['required']">
+      First Name is required
+    </div>
+  </div>
+  <div>
+    <label>Last name:</label>
+    <input type="text" id="lastName" class="form-control" formControlName="lastName" required  />
+    <div *ngIf="(userForm.controls['lastName']?.touched || isDisabled)&& userForm.controls['lastName']?.errors?.['required']">
+      Last Name is Required
+    </div>
+  </div>
+
+  <button (click)="add()">
+    Add
+  </button>
+</div>
+
+<!-- User table -->
+<table>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Total Expenses</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <div *ngIf="users">
+      <tr *ngFor="let k of key" [class.selected]="users[k] === selectedUser" (click)="onSelect(users[k])">
+        <td>
+          <input [(ngModel)]="users[k].firstName" [ngModelOptions]="{ standalone: true }" />
+        </td>
+        <td>
+          <input [(ngModel)]="users[k].lastName" [ngModelOptions]="{ standalone: true }" />
+        </td>
+        <td>{{ users[k].totalExpenses }}</td>
+        <td>
+          <button (click)="delete(k)">Delete</button>
+        </td>
+      </tr>
+    </div>
+  </tbody>
+</table>
+
+<!-- Save button for updating user information -->
+<div *ngIf="selectedUser">
+  <button (click)="update(selectedUser)">Save</button>
+</div>

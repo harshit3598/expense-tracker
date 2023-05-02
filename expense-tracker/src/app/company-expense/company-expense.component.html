@@ -1,0 +1,15 @@
+<table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Total Expense</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let expense of companyExpenses">
+        <td>{{ expense.category }}</td>
+        <td>{{ expense.totalExpense }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
