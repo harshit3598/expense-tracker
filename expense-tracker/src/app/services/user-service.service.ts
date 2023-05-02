@@ -6,6 +6,8 @@ import { Observable, map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
+//place where users data is stored
 export default class UserService {
   usersUrl: any
   usersJsonArray = []
@@ -34,10 +36,12 @@ export default class UserService {
 
   }
 
+  //gets the list of user
   getUsers(): any {
     return this.usersData;
   }
 
+  //gets users, add users, update users and delete users
   getUser(id: number): User {
     return this.usersData.get(id);
   }

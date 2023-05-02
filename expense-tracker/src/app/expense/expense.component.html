@@ -5,6 +5,7 @@
 
     <input type="hidden" id="id" class="form-control" formControlName="id" />
 
+    <!--iterate over the keys, validate the form by adding validations-->
     <div class="form-group">
       <label for="user">User:</label>
       <select id="user" class="form-control" name="userId" formControlName="userId" required>
@@ -31,7 +32,7 @@
         required>
 
         <div *ngIf="(expenseForm.controls['description']?.touched || isValid) && expenseForm.controls['description']?.errors?.['required']">
-          description is required
+          Description is required
         </div>
     </div>
     <div class="form-group">
@@ -39,17 +40,20 @@
       <input id="cost" class="form-control" type="number" name="cost" formControlName="cost" required>
 
       <div *ngIf="(expenseForm.controls['cost']?.touched || isValid) && expenseForm.controls['cost']?.errors?.['required']">
-        cost is required
+        Cost is required
       </div>
     </div>
+    <!--Buttons used if new expenses are added or existing expenses are edited-->
     <button class="btn btn-primary" (click)="modifyExpense()">
       <span *ngIf="expenseForm.controls['id'].value == null">Add</span>
       <span *ngIf="expenseForm.controls['id'].value != null">Edit</span>
       Expense</button>
+      <!--Button to clear the form-->
     <button class="btn btn-primary" (click)="clearForm()">Cancel</button>
   </form>
 </div>
 
+<!--Displays the data accordingly and also it can be deleted-->
 <div class="container">
   <h1>Expense List</h1>
   <table class="table table-striped">
@@ -69,6 +73,7 @@
         <td>{{ expenses[key].description }}</td>
         <td>{{ expenses[key].cost | currency }}</td>
         <td>
+          <!--Added edit button and delete buttons-->
           <button class="btn btn-danger" (click)="editExpense(expenses[key])">Edit</button>
           <button class="btn btn-danger" (click)="deleteExpense(expenses[key])">Delete</button>
         </td>

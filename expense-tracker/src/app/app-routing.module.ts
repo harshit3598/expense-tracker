@@ -4,6 +4,7 @@ import { CompanyExpenseComponent } from './company-expense/company-expense.compo
 import { ExpenseComponent } from './expense/expense.component';
 import { UserTableComponent } from './user-table/user-table.component';
 
+//routes and their respective components which are rendered
 const routes: Routes = [
   { path: '', redirectTo: '/users', pathMatch: 'full' },
   { path: 'users', component: UserTableComponent },

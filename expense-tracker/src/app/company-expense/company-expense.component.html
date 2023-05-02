@@ -6,6 +6,7 @@
       </tr>
     </thead>
     <tbody>
+      <!--iterating over the companyExpenses object to display the data based on category and their cost-->
       <tr *ngFor="let expense of companyExpenses|keyvalue">
         <td>{{ expense.key }}</td>
         <td>{{ expense.value }}</td>

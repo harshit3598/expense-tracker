@@ -6,11 +6,5 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CompanyExpenseService {
-  private apiUrl = 'api/companyExpenses';
-
-  constructor(private http: HttpClient) { }
-
-  getExpensesByCategory(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
-  }
+  constructor() { }
 }

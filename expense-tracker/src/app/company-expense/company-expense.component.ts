@@ -12,6 +12,7 @@ export class CompanyExpenseComponent implements OnInit {
 
   constructor(private expenseService: ExpensesService) { }
 
+  //when this component is rendered we will take the expenses object
   ngOnInit(): void {
     this.getCompanyExpenses();
   }
@@ -19,6 +20,7 @@ export class CompanyExpenseComponent implements OnInit {
   getCompanyExpenses(): void {
     this.expenses = this.expenseService.getExpenses();
 
+    //initialized an object which gives the expenses for a particular category
     this.companyExpenses = {
       "Food":0,
       "Travel":0,
@@ -26,12 +28,9 @@ export class CompanyExpenseComponent implements OnInit {
 
     }
 
+    //will add the result to the object
     Object.keys(this.expenses).forEach((key: any) => {
       this.companyExpenses[this.expenses[key].category] += this.expenses[key].cost
     });
-
-    console.log(this.companyExpenses);
-    
-
   }
 }

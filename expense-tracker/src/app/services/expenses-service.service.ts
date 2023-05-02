@@ -8,6 +8,7 @@ import { Observable, catchError, map, of, tap } from 'rxjs';
 })
 export class ExpensesService {
 
+  //place where data for expenses are stored and manipulated
   expensesData = {
 
     "1": { "id": 1, "userId": 1, "category": "Food", "description": "Lunch", "cost": 100 },
@@ -26,41 +27,4 @@ export class ExpensesService {
     return this.expensesData;
   }
 
-  // addExpense(expense: Expense): Observable<Expense> {
-  //   // return this.http.post<Expense>(this.expensesUrl, expense, this.httpOptions)
-  //   //   .pipe(
-  //   //     tap((newExpense: Expense) => console.log(`added expense w/ id=${newExpense.id}`)),
-  //   //     catchError(this.handleError<Expense>('addExpense'))
-  //   //   );
-  // }
-
-  // updateExpense(expense: Expense): Observable<any> {
-  //   // return this.http.put(this.expensesUrl, expense, this.httpOptions)
-  //   //   .pipe(
-  //   //     tap(_ => console.log(`updated expense id=${expense.id}`)),
-  //   //     catchError(this.handleError<any>('updateExpense'))
-  //   //   );
-  // }
-
-  // deleteExpense(id: number): Observable<Expense> {
-  //   // const url = `${this.expensesUrl}/${id}`;
-
-  //   // return this.http.delete<Expense>(url, this.httpOptions)
-  //   //   .pipe(
-  //   //     tap(_ => console.log(`deleted expense id=${id}`)),
-  //   //     catchError(this.handleError<Expense>('deleteExpense'))
-  //   //   );
-  // }
-
-  // getExpensesByCategory(): Observable<any[]> {
-  //   return this.http.get<any[]>(this.expensesUrl);
-  // }
-
-  // private handleError<T>(operation = 'operation', result?: T) {
-  //   // return (error: any): Observable<T> => {
-  //   //   console.error(error);
-  //   //   console.log(`${operation} failed: ${error.message}`);
-  //   //   return of(result as T);
-  //   // };
-  // }
 }

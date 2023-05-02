@@ -5,6 +5,7 @@
   <div>
     <label>First name:</label>
     <input type="text" id="firstName" class="form-control" formControlName="firstName" required />
+    <!--Added Validation Below for required fields-->
     <div *ngIf="(userForm.controls['firstName']?.touched || isDisabled) && userForm.controls['firstName']?.errors?.['required']">
       First Name is required
     </div>
@@ -12,6 +13,7 @@
   <div>
     <label>Last name:</label>
     <input type="text" id="lastName" class="form-control" formControlName="lastName" required  />
+    <!--Added Validation Below for required fields-->
     <div *ngIf="(userForm.controls['lastName']?.touched || isDisabled)&& userForm.controls['lastName']?.errors?.['required']">
       Last Name is Required
     </div>
@@ -34,6 +36,7 @@
   </thead>
   <tbody>
     <div *ngIf="users">
+      <!--Added the values in the input box and can also be updated there-->
       <tr *ngFor="let k of key" [class.selected]="users[k] === selectedUser" (click)="onSelect(users[k])">
         <td>
           <input [(ngModel)]="users[k].firstName" [ngModelOptions]="{ standalone: true }" />
