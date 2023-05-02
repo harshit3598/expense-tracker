@@ -52,8 +52,6 @@ export default class UserService {
   }
 
   updateUser(user: User): void {
-    console.log(user);
-    
     this.usersData[user.id] = user;
   }
 
