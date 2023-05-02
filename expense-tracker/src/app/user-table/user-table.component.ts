@@ -62,6 +62,10 @@ export class UserTableComponent {
 
   //to update the users
   update(user: any): void {
+    //to prevent from adding blank user
+    if(user.id==0 && user.firstName=='' && user.lastName==''){
+      return
+    }
     this.users[user.id] = { id: user.id, firstName: user.firstName, lastName: user.lastName, totalExpenses: user.totalExpenses };
   }
 }
