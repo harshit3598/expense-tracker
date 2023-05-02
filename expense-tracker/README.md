@@ -12,14 +12,19 @@ This is a simple web application for tracking expenses. The application allows u
 
 ## Features
 The application provides the following features:
+You'll get to see 3 components' links which were supposed to be implemented after running the project.
 
 ## User Management
 
 The user management feature allows users to add, read, edit, and delete users. Users are displayed in a table that shows the user's first name, last name, and total expenses. The total expenses column is read-only and displays the total amount of expenses for the user.
 
+The Save button will update the records, the add button will add record, Delete button will delete the records
+
 ## Expense Management
 
 The expense management feature allows users to add, read, edit, and delete expenses for each user. Expenses are displayed in a table that shows the user's full name, category, description, and cost. Users are selected from a dropdown list, and categories are selected from a dropdown list of food, travel, and equipment.
+
+The Add Expense will add the expenses, Edit will edit the expense and delete will delete the expense
 
 ## Company Expense Summary
 
