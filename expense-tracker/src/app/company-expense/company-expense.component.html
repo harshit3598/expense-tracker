@@ -6,9 +6,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let expense of companyExpenses">
-        <td>{{ expense.category }}</td>
-        <td>{{ expense.totalExpense }}</td>
+      <tr *ngFor="let expense of companyExpenses|keyvalue">
+        <td>{{ expense.key }}</td>
+        <td>{{ expense.value }}</td>
       </tr>
     </tbody>
   </table>

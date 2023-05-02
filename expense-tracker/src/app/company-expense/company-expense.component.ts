@@ -7,7 +7,8 @@ import { ExpensesService } from '../services/expenses-service.service';
   styleUrls: ['./company-expense.component.css']
 })
 export class CompanyExpenseComponent implements OnInit {
-  companyExpenses: any[]=[];
+  expenses: any;
+  companyExpenses: any;
 
   constructor(private expenseService: ExpensesService) { }
 
@@ -16,9 +17,21 @@ export class CompanyExpenseComponent implements OnInit {
   }
 
   getCompanyExpenses(): void {
-    // this.expenseService.getExpensesByCategory()
-    //   .subscribe(companyExpenses => {
-    //     this.companyExpenses = companyExpenses;
-    //   });
+    this.expenses = this.expenseService.getExpenses();
+
+    this.companyExpenses = {
+      "Food":0,
+      "Travel":0,
+      "Equipment":0
+
+    }
+
+    Object.keys(this.expenses).forEach((key: any) => {
+      this.companyExpenses[this.expenses[key].category] += this.expenses[key].cost
+    });
+
+    console.log(this.companyExpenses);
+    
+
   }
 }
