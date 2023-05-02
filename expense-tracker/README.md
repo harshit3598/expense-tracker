@@ -1,27 +1,37 @@
 # ExpenseTracker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.7.
+This is a simple web application for tracking expenses. The application allows users to add, edit, and delete users and expenses, and also displays a summary of expenses by category using Angular
 
-## Development server
+## Getting Started 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1) Clone the repository to your local machine.
+2) Open a terminal window and navigate to the root directory of the project.
+3) Run npm install to install the project dependencies.
+4) Run ng serve to start the development server.
+5) Open a web browser and navigate to http://localhost:4200 to view the application.
 
-## Code scaffolding
+## Features
+The application provides the following features:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## User Management
 
-## Build
+The user management feature allows users to add, read, edit, and delete users. Users are displayed in a table that shows the user's first name, last name, and total expenses. The total expenses column is read-only and displays the total amount of expenses for the user.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Expense Management
 
-## Running unit tests
+The expense management feature allows users to add, read, edit, and delete expenses for each user. Expenses are displayed in a table that shows the user's full name, category, description, and cost. Users are selected from a dropdown list, and categories are selected from a dropdown list of food, travel, and equipment.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Company Expense Summary
 
-## Running end-to-end tests
+The company expense summary feature displays a read-only table that shows the total amount of expenses for each category across all users.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Contributing
 
-## Further help
+Contributions to the project are welcome! To contribute, follow these steps:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1) Fork the repository to your GitHub account.
+2) Clone the forked repository to your local machine.
+3) Create a new branch for your changes.
+4) Make your changes and commit them to the new branch.
+5) Push the branch to your GitHub account.
+6) Open a pull request from your branch to the original repository.
