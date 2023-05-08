@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { User, Expense } from '../models';
+import { User } from '../models';
 import { ExpensesService } from '../services/expenses-service.service';
 import UserService from "../services/user-service.service"
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -17,7 +17,7 @@ export class UserTableComponent {
   isDisabled: boolean = false;
 
   //initialize the service to make the changes
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private expenseService: ExpensesService) { }
 
   async ngOnInit() {
     this.userForm = new FormGroup({
@@ -35,19 +35,7 @@ export class UserTableComponent {
 
   add(): void {
     //Added validations for the form
-    if (this.userForm.valid) {
-      this.isDisabled = false;
-      //To generate the id for the user
-      var id: number = Math.floor(Math.random() * 100);
-      var firstName = this.userForm.get('firstName')?.value;
-      var lastName = this.userForm.get('lastName')?.value;
-      this.users[id] = { id, firstName, lastName, totalExpenses: 0 };
-    }
-    else {
-      //if the Add button is clicked and still values are 
-      this.isDisabled = true;
-    }
-
+    this.userService.add(this.userForm, this.isDisabled, this.users);
   }
 
   //to obtain the keys of users which will be used to iterate in the array with the values
@@ -57,15 +45,14 @@ export class UserTableComponent {
 
   //to delete the users
   delete(id: any): void {
-    delete this.users[id];
+    this.userService.deleteUser(this.users, id);
+    this.expenseService.deleteExpenseByUserId(id);
   }
 
   //to update the users
   update(user: any): void {
-    //to prevent from adding blank user
-    if(user.id==0 && user.firstName=='' && user.lastName==''){
-      return
-    }
-    this.users[user.id] = { id: user.id, firstName: user.firstName, lastName: user.lastName, totalExpenses: user.totalExpenses };
+    //to prevent from updating blank user
+    this.userService.updateUser(this.users, user);
+    
   }
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { User } from '../models';
-import { Observable, map } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -46,17 +45,37 @@ export default class UserService {
     return this.usersData.get(id);
   }
 
-
-  addUser(user: User): User {
-    return this.usersData.set(user.id, { id: user.id, firstName: user.firstName, lastName: user.lastName, totalExpense: this.usersData.totalExpense });
+  //add the user
+  add(userForm: FormGroup, isDisabled:boolean, users:any) {
+    if (userForm.valid) {
+      isDisabled = false;
+      //To generate the id for the user
+      var id: number = Math.floor(Math.random() * 1000000);
+      var firstName = userForm.get('firstName')?.value;
+      var lastName = userForm.get('lastName')?.value;
+      users[id] = { id, firstName, lastName, totalExpenses: 0 };
+    }
+    else {
+      //if the Add button is clicked and still values are 
+      isDisabled = true;
+    }
   }
 
-  updateUser(user: User): void {
+  //delete the user
+  deleteUser(users:any, id:number){
+    delete users[id];
+  }
+
+  //update user after updating the total expense value of the user while updating or deleting expenses
+  updateTotalExpenseForUser(user: User): void {
     this.usersData[user.id] = user;
   }
 
-  // deleteUser(id: number): Observable < User > {
-  //   const url = `${this.usersUrl}/${id}`;
-  //   return this.http.delete<User>(url);
-  // }
+  //update the user
+  updateUser(users: any, user:any){
+    if(user.id==0 && user.firstName=='' && user.lastName==''){
+      return
+    }
+    users[user.id] = { id: user.id, firstName: user.firstName, lastName: user.lastName, totalExpenses: user.totalExpenses };
+  }
 }
